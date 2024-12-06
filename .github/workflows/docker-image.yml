@@ -24,6 +24,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+
+      - name: List files to debug
+        run: ls -R
+
       # Build the Docker image
       - name: Build the Docker image
         run: |
