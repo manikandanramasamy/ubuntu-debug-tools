@@ -30,7 +30,7 @@ jobs:
       - name: Build Docker image
         id: build_image
         run: |
-          docker build "$GITHUB_WORKSPACE" -t ${{ secrets.DOCKER_USERNAME }}/auto-deployment:$GITHUB_SHA --label dockerfile-path="Dockerfile"
+          docker build "$GITHUB_WORKSPACE" -t ${{ secrets.DOCKER_USERNAME }}/auto-deployment:$GITHUB_SHA --label dockerfile-path="ubuntu-debug-tools.dockerfile"
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/auto-deployment:$GITHUB_SHA
 
