@@ -32,6 +32,9 @@ jobs:
 
       - name: Print working directory
         run: pwd
+        
+      - name: Display Dockerfile
+        run: cat ./ubuntu-debug-tools.Dockerfile
       - name: Build Docker image
         id: build_image
         run: |
