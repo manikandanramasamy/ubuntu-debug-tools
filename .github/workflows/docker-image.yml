@@ -27,20 +27,13 @@ jobs:
       - name: Echo GitHub SHA
         run: echo $GITHUB_SHA
 
-      - name: List files to debug
-        run: ls -R
 
-      - name: Print working directory
-        run: pwd
-        
-      - name: Display Dockerfile
-        run: cat ./ubuntu-debug-tools.dockerfile
       - name: Build Docker image
         id: build_image
         run: |
-          docker  build -t ${{ secrets.DOCKER_USERNAME }}/auto-deployment:${{ github.sha }} -f  ./ubuntu-debug-tools.dockerfile .
+          docker  build -t ${{ secrets.DOCKER_USERNAME }}/ubuntu-debug-tools:v1.${{ env.COMMIT_COUNT }} -f  ./ubuntu-debug-tools.dockerfile .
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/auto-deployment:$GITHUB_SHA
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/ubuntu-debug-tools:v1.${{ env.COMMIT_COUNT }}
 
       - name: Logout from Docker Hub
         run: docker logout
