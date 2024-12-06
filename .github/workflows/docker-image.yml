@@ -27,6 +27,8 @@ jobs:
       - name: Echo GitHub SHA
         run: echo $GITHUB_SHA
 
+      - name: List files to debug
+        run: ls -R
       - name: Build Docker image
         id: build_image
         run: |
