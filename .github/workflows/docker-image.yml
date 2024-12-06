@@ -29,6 +29,9 @@ jobs:
 
       - name: List files to debug
         run: ls -R
+
+      - name: Print working directory
+        run: pwd
       - name: Build Docker image
         id: build_image
         run: |
