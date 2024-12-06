@@ -31,9 +31,9 @@ jobs:
       # Build the Docker image
       - name: Build the Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/ubuntu-debug-tools.dockerfile:${{ github.sha }} .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/ubuntu-debug-tools:${{ github.sha }}  -f "ubuntu-debug-tools.dockerfile".
 
       # Push the Docker image to Docker Hub
       - name: Push the Docker image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/ubuntu-debug-tools.dockerfile:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/ubuntu-debug-tools:${{ github.sha }}
