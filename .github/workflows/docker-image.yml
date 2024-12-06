@@ -34,11 +34,11 @@ jobs:
         run: pwd
         
       - name: Display Dockerfile
-        run: cat ./ubuntu-debug-tools.Dockerfile
+        run: cat ./ubuntu-debug-tools.dockerfile
       - name: Build Docker image
         id: build_image
         run: |
-          docker  build -t ${{ secrets.DOCKER_USERNAME }}/auto-deployment:${{ github.sha }} -f  /home/runner/work/ubuntu-debug-tools/ubuntu-debug-tools/ubuntu-debug-tools.Dockerfile .
+          docker  build -t ${{ secrets.DOCKER_USERNAME }}/auto-deployment:${{ github.sha }} -f  ./ubuntu-debug-tools.dockerfile .
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/auto-deployment:$GITHUB_SHA
 
