@@ -29,8 +29,8 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /root
 
 
-# Define the entrypoint as bash, allowing command-line arguments to be passed
-ENTRYPOINT ["/bin/bash", "-c"]
+# Set bash as the entrypoint to keep it interactive
+ENTRYPOINT ["/bin/bash"]
 
-# Default command: Run bash to keep the container interactive
-CMD ["echo 'Hello from Docker!' && exec bash"]
+# Default command: Start bash in interactive mode
+CMD ["-l"]
