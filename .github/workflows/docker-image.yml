@@ -31,7 +31,7 @@ jobs:
         id: count_commits
         run: |
           # Fetch all commits and count them
-          commit_count=$(git rev-list --count HEAD)
+          commit_count=$(git rev-list --count --first-parent HEAD)
           echo "Number of commits: $commit_count"
           echo "::set-output name=commit_count::$commit_count"
 
