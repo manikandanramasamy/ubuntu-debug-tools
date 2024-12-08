@@ -34,5 +34,4 @@ ENTRYPOINT ["/bin/bash"]
 
 # Default command: Run bash interactively
 CMD ["-l"]
-# Default command: Start bash interactively and keep the container alive
-# CMD ["-c", "echo 'Hello from Docker!' && tail -f /dev/null"]
+
