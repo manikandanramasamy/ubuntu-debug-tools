@@ -33,4 +33,5 @@ WORKDIR /root
 ENTRYPOINT ["/bin/bash"]
 
 # Default command: Start bash in interactive mode
-CMD ["-l"]
+# Default command: Start bash interactively and keep the container alive
+CMD ["-c", "echo 'Hello from Docker!' && tail -f /dev/null"]
