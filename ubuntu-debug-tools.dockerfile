@@ -32,5 +32,5 @@ WORKDIR /root
 # Define the entrypoint as bash, allowing command-line arguments to be passed
 ENTRYPOINT ["/bin/bash", "-c"]
 
-# Default command to run when starting the container (can be overridden)
-CMD ["echo 'Hello from Docker!'"]
+# Default command: Run bash to keep the container interactive
+CMD ["echo 'Hello from Docker!' && exec bash"]
