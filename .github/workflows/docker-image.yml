@@ -30,18 +30,17 @@ jobs:
       - name: Generate Random Number Using GitHub Context
         id: random_number
         run: |
-          # Generate a pseudo-random number using GitHub's run context
           random_number=$(( ( RANDOM % 10000 ) + 10000 ))  # Between 10000 and 19999
           echo "Generated random number: $random_number"
-          echo "::set-output name=random_number::$random_number"
+          echo "RANDOM_NUMBER=$random_number" >> $GITHUB_ENV
       - name: Echo current version
-        run: echo  $new_version
+        run: echo ${{ env.RANDOM_NUMBER }}
       - name: Build Docker image
         id: build_image
         run: |
-          docker  build -t ${{ secrets.DOCKER_USERNAME }}/ubuntu-debug-tools: $new_version -f  ./ubuntu-debug-tools.dockerfile .
+          docker  build -t ${{ secrets.DOCKER_USERNAME }}/ubuntu-debug-tools: ${{ env.RANDOM_NUMBER }} -f  ./ubuntu-debug-tools.dockerfile .
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/ubuntu-debug-tools:$new_version
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/ubuntu-debug-tools:${{ env.RANDOM_NUMBER }}
 
       - name: Logout from Docker Hub
         run: docker logout
