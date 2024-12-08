@@ -28,5 +28,9 @@ RUN apt-get update && apt-get install -y \
 # Set the working directory to the root directory
 WORKDIR /root
 
-# Default command to run when starting the container
-CMD ["bash"]
+
+# Define the entrypoint as bash, allowing command-line arguments to be passed
+ENTRYPOINT ["/bin/bash", "-c"]
+
+# Default command to run when starting the container (can be overridden)
+CMD ["echo 'Hello from Docker!'"]
