@@ -27,7 +27,8 @@ jobs:
       - name: Echo GitHub SHA
         run: echo $GITHUB_SHA
 
-
+      - name: Echo current version
+        run: echo v1.${{ env.COMMIT_COUNT }}
       - name: Build Docker image
         id: build_image
         run: |
