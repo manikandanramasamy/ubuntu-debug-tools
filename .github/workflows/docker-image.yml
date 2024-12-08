@@ -30,7 +30,7 @@ jobs:
       - name: Generate Random Number Using GitHub Context
         id: random_number
         run: |
-          random_number=$(( ( RANDOM % 10000 ) + 10000 ))  # Between 10000 and 19999
+          random_number=$(( ( RANDOM % 10 ) + 10 ))  # Between 10000 and 19999
           echo "Generated random number: $random_number"
           echo "RANDOM_NUMBER=$random_number" >> $GITHUB_ENV
       - name: Echo current version
