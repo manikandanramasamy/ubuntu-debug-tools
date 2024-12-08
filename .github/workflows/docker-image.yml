@@ -34,15 +34,6 @@ jobs:
           random_number=$(( ( RANDOM % 10000 ) + 10000 ))  # Between 10000 and 19999
           echo "Generated random number: $random_number"
           echo "::set-output name=random_number::$random_number"
-      - name: Add random number to version
-        run: |
-          new_version="v1.0.${{ steps.random_number.outputs.random_number }}"
-          echo "New version with random number: $new_version"
-          echo $new_version > VERSION.txt
-          git add VERSION.txt
-          git commit -m "Bump version with random number $new_version"
-          git push origin main
-
       - name: Echo current version
         run: echo  $new_version
       - name: Build Docker image
