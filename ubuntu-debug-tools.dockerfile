@@ -1,4 +1,4 @@
-docke# Use the official Ubuntu image as the base for the container
+# Use the official Ubuntu image as the base for the container
 FROM ubuntu:latest
 
 # Set DEBIAN_FRONTEND to noninteractive to avoid prompts
