@@ -27,26 +27,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Count the number of commits
-        id: count_commits
+      - name: Generate Random Number Using GitHub Context
+        id: random_number
         run: |
-          # Fetch all commits and count them
-          commit_count=$(git rev-list --count --first-parent HEAD)
-          echo "Number of commits: $commit_count"
-          echo "::set-output name=commit_count::$commit_count"
-
-      - name: Display commit count
+          # Generate a pseudo-random number using GitHub's run context
+          random_number=$(( ( RANDOM % 10000 ) + 10000 ))  # Between 10000 and 19999
+          echo "Generated random number: $random_number"
+          echo "::set-output name=random_number::$random_number"
+      - name: Add random number to version
         run: |
-          echo "Total number of commits in the repository: ${{ steps.count_commits.outputs.commit_count }}"
+          new_version="v1.0.${{ steps.random_number.outputs.random_number }}"
+          echo "New version with random number: $new_version"
+          echo $new_version > VERSION.txt
+          git add VERSION.txt
+          git commit -m "Bump version with random number $new_version"
+          git push origin main
 
       - name: Echo current version
-        run: echo v1.${{ env.COMMIT_COUNT }}
+        run: echo  $new_version
       - name: Build Docker image
         id: build_image
         run: |
-          docker  build -t ${{ secrets.DOCKER_USERNAME }}/ubuntu-debug-tools:v1.${{ env.COMMIT_COUNT }} -f  ./ubuntu-debug-tools.dockerfile .
+          docker  build -t ${{ secrets.DOCKER_USERNAME }}/ubuntu-debug-tools: $new_version -f  ./ubuntu-debug-tools.dockerfile .
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/ubuntu-debug-tools:v1.${{ env.COMMIT_COUNT }}
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/ubuntu-debug-tools:$new_version
 
       - name: Logout from Docker Hub
         run: docker logout
