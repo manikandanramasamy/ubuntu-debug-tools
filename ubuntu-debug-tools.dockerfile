@@ -1,4 +1,4 @@
-# Use the official Ubuntu image as the base for the container
+docke# Use the official Ubuntu image as the base for the container
 FROM ubuntu:latest
 
 # Set DEBIAN_FRONTEND to noninteractive to avoid prompts
@@ -32,6 +32,7 @@ WORKDIR /root
 # Set bash as the entrypoint to keep it interactive
 ENTRYPOINT ["/bin/bash"]
 
-# Default command: Start bash in interactive mode
+# Default command: Run bash interactively
+CMD ["-l"]
 # Default command: Start bash interactively and keep the container alive
-CMD ["-c", "echo 'Hello from Docker!' && tail -f /dev/null"]
+# CMD ["-c", "echo 'Hello from Docker!' && tail -f /dev/null"]
