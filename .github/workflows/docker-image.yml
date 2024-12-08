@@ -24,8 +24,20 @@ jobs:
       - name: Echo Docker Hub Username
         run: echo ${{ secrets.DOCKER_USERNAME}}
 
-      - name: Echo GitHub SHA
-        run: echo $GITHUB_SHA
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Count the number of commits
+        id: count_commits
+        run: |
+          # Fetch all commits and count them
+          commit_count=$(git rev-list --count HEAD)
+          echo "Number of commits: $commit_count"
+          echo "::set-output name=commit_count::$commit_count"
+
+      - name: Display commit count
+        run: |
+          echo "Total number of commits in the repository: ${{ steps.count_commits.outputs.commit_count }}"
 
       - name: Echo current version
         run: echo v1.${{ env.COMMIT_COUNT }}
